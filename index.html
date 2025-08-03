@@ -5,9 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanzas</title>
     <link rel="stylesheet" href="src/app.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Iniciando proyecto</h1>
-    
+    <div class="container-fluid text-secondary">
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Finanzas personales</h3>
+                        <p class="subtitulo"><cite>Administra tus ingresos y egresos de manera inteligente</cite></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <!-- Espacio para nuevo movimiento -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Nueva operación
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Tipo de Transacción:</label>
+                            <div class="radio-group">
+                                <div class="radio-option active" onclick="selectTransactionType('income')">
+                                    <input type="radio" name="type" value="income" checked>
+                                    <span>Ingreso</span>
+                                </div>
+                                <div class="radio-option" onclick="selectTransactionType('expense')">
+                                    <input type="radio" name="type" value="expense">
+                                    <span>Gasto</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="amount" step="0.01" placeholder="0.00" required>
+                                    <label for="amount">Cantidad (USD)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control" id="category" required>
+                                    <option value="">Selecciona una categoría</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="description" placeholder="Descripción de la operación" required>
+                                    <label for="description">Descripción de la operación</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <input type="date" class="form-control" id="date" placeholder="Fecha" required>
+                                    <label for="date">Fecha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-dark">Agregar</button>
+                                <button type="button" class="btn btn-outline-dark">Limpiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Espacio para historial de movimientos -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="section-title">
+                            <span>Historial de Transacciones</span>
+                            <span class="transaction-count" id="transactionCount">0 transacciones</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="transactions-list" id="transactionsList">
+                            <div class="no-transactions">
+                                No hay transacciones registradas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Resumen financiero
+                    </div>
+                    <div class="card-body">
+                        <div class="summary-item">
+                            <span class="summary-label">Total Ingresos:</span>
+                            <span class="summary-value income" id="totalIncome">$0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Total Gastos:</span>
+                            <span class="summary-value expense" id="totalExpenses">$0.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Balance:</span>
+                            <span class="summary-value balance" id="balance">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        Análisis gráfico
+                    </div>
+                    <div class="card-body">
+                        <div class="charts-section">
+                            <div class="charts-grid">
+                                <div class="chart-container">
+                                    <canvas id="monthlyChart"></canvas>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="categoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" id="datos">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="src/app.js"></script>
 </body>
 </html>
