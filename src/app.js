@@ -204,7 +204,7 @@ function renderTransactions() {
                 ${transaction.type === 'expense' ? '-' : '+'}${formatCurrency(transaction.amount)}
             </div>
             <button class="delete-btn" onclick="deleteTransaction(${transaction.id})" title="Eliminar">
-                🗑️
+                ✖️
             </button>
         </div>
     `).join('');
@@ -530,7 +530,7 @@ function addUtilityButtons() {
     const header = document.querySelector('#datos');
     const utilityDiv = document.createElement('div');
     utilityDiv.style.cssText = `
-        margin-top: 20px;
+        margin-top: 4px;
         display: flex;
         gap: 10px;
         justify-content: center;
@@ -538,46 +538,12 @@ function addUtilityButtons() {
     `;
     
     utilityDiv.innerHTML = `
-        <button onclick="exportData()" style="
-            background: rgba(51, 51, 51,0.2);
-            color: white;
-            border: 1px solid rgba(51, 51, 51,0.3);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        " onmouseover="this.style.background='rgba(51, 51, 51,0.3)'" 
-            onmouseout="this.style.background='rgba(51, 51, 51,0.2)'">
-            📥 Exportar Datos
-        </button>
-        <label for="importFile" style="
-            background: rgba(51, 51, 51,0.2);
-            color: white;
-            border: 1px solid rgba(51, 51, 51,0.3);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        " onmouseover="this.style.background='rgba(51, 51, 51,0.3)'" 
-            onmouseout="this.style.background='rgba(51, 51, 51,0.2)'">
-            📤 Importar Datos
+        <button onclick="exportData()" class="btn btn-dark">Exportar Datos</button>
+        <label for="importFile" class="btn btn-dark">
+            Importar Datos
         </label>
         <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display: none;">
-        <button onclick="clearAllData()" style="
-            background: rgba(229,62,62,0.2);
-            color: white;
-            border: 1px solid rgba(229,62,62,0.3);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        " onmouseover="this.style.background='rgba(229,62,62,0.3)'" 
-            onmouseout="this.style.background='rgba(229,62,62,0.2)'">
-            🗑️ Limpiar Todo
-        </button>
+        <button onclick="clearAllData()" class="btn btn-outline-danger">Limpiar Todo</button>
     `;
     
     header.appendChild(utilityDiv);
@@ -627,16 +593,8 @@ function addFilters() {
             border-radius: 6px;
             font-size: 14px;
         ">
-        <button onclick="clearFilters()" style="
-            background: #e2e8f0;
-            color: #4a5568;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-        ">
-            🔄 Limpiar Filtros
+        <button onclick="clearFilters()" class="btn btn-outline-dark">
+            Limpiar Filtros
         </button>
     `;
     
@@ -686,7 +644,7 @@ function renderFilteredTransactions(filteredTransactions) {
     countElement.textContent = `${filteredTransactions.length} de ${transactions.length} transacciones`;
 
     if (filteredTransactions.length === 0) {
-        container.innerHTML = '<div class="no-transactions">🔍 No se encontraron transacciones con los filtros aplicados</div>';
+        container.innerHTML = '<div class="no-transactions">No se encontraron transacciones con los filtros aplicados</div>';
         return;
     }
 
@@ -703,9 +661,7 @@ function renderFilteredTransactions(filteredTransactions) {
             <div class="transaction-amount ${transaction.type === 'income' ? 'amount-income' : 'amount-expense'}">
                 ${transaction.type === 'expense' ? '-' : '+'}${formatCurrency(transaction.amount)}
             </div>
-            <button class="delete-btn" onclick="deleteTransaction(${transaction.id})" title="Eliminar">
-                🗑️
-            </button>
+            <button class="btn btn-danger" onclick="deleteTransaction(${transaction.id})" title="Eliminar">✖️</button>
         </div>
     `).join('');
 }
